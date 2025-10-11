@@ -1,0 +1,22 @@
+{
+  "name": "nube-flow-system",
+  "version": "1.0.0",
+  "description": "A CSS framework built with SASS",
+  "main": "css/index.css",
+  "scripts": {
+    "build": "sass nube-flow:css --style=compressed --no-source-map",
+    "watch": "sass nube-flow:css --watch --style=expanded --source-map",
+    "dev": "sass nube-flow:css --watch --style=expanded"
+  },
+  "keywords": [
+    "css",
+    "sass",
+    "scss",
+    "framework"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

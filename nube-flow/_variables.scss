@@ -1,0 +1,117 @@
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+
+// External CSS variables mapping
+// Update these mappings if the external source changes
+
+$gap-0: var(--gap--0);
+$gap-1: var(--gap--1);
+$gap-2: var(--gap--2);
+$gap-3: var(--gap--3);
+$gap-4: var(--gap--4);
+$gap-5: var(--gap--5);
+$gap-6: var(--gap--6);
+$gap-7: var(--gap--7);
+$gap-8: var(--gap--8);
+$gap-9: var(--gap--9);
+$gap-10: var(--gap--10);
+$gap-11: var(--gap--11);
+$gap-12: var(--gap--12);
+$gap-13: var(--gap--13);
+
+$font-weight-0: var(--font--weight--0);
+$font-weight-1: var(--font--weight--1);
+$font-weight-2: var(--font--weight--2);
+$font-weight-3: var(--font--weight--3);
+$font-weight-4: var(--font--weight--4);
+
+$font-height-0: var(--font--height--0);
+$font-height-1: var(--font--height--1);
+$font-height-2: var(--font--height--2);
+$font-height-3: var(--font--height--3);
+$font-height-4: var(--font--height--4);
+
+$font-decoration-none: var(--font--decoration--none);
+$font-decoration-underline: var(--font--decoration--underline);
+
+$font-transform-none: var(--font--transform--none);
+$font-transform-uppercase: var(--font--transform--uppercase);
+$font-transform-lowercase: var(--font--transform--lowercase);
+$font-transform-capitalize: var(--font--transform--capitalize);
+
+$radius-0: var(--radius--0);
+$radius-1: var(--radius--1);
+$radius-2: var(--radius--2);
+$radius-3: var(--radius--3);
+$radius-4: var(--radius--4);
+
+$border-0: var(--border--0);
+$border-1: var(--border--1);
+$border-2: var(--border--2);
+$border-3: var(--border--3);
+$border-4: var(--border--4);
+
+// Variable maps
+$gap-values: (
+  0: $gap-0,
+  1: $gap-1,
+  2: $gap-2,
+  3: $gap-3,
+  4: $gap-4,
+  5: $gap-5,
+  6: $gap-6,
+  7: $gap-7,
+  8: $gap-8,
+  9: $gap-9,
+  10: $gap-10,
+  11: $gap-11,
+  12: $gap-12,
+  13: $gap-13,
+);
+
+$font-weight-values: (
+  0: $font-weight-0,
+  1: $font-weight-1,
+  2: $font-weight-2,
+  3: $font-weight-3,
+  4: $font-weight-4,
+);
+
+$font-height-values: (
+  0: $font-height-0,
+  1: $font-height-1,
+  2: $font-height-2,
+  3: $font-height-3,
+  4: $font-height-4,
+);
+
+$font-decoration-values: (
+  0: $font-decoration-none,
+  1: $font-decoration-underline,
+);
+
+$font-transform-values: (
+  0: $font-transform-none,
+  1: $font-transform-uppercase,
+  2: $font-transform-lowercase,
+  3: $font-transform-capitalize,
+);
+
+$radius-values: (
+  0: $radius-0,
+  1: $radius-1,
+  2: $radius-2,
+  3: $radius-3,
+  4: $radius-4,
+);
+
+$border-values: (
+  0: $border-0,
+  1: $border-1,
+  2: $border-2,
+  3: $border-3,
+  4: $border-4,
+);

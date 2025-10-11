@@ -1,0 +1,172 @@
+@use "variables" as *;
+
+// Gap mixins
+@mixin generate-flex-gap-classes($values) {
+  @each $key, $value in $values {
+    [class*="fg#{$key}"] {
+      gap: $value;
+    }
+  }
+}
+
+@mixin generate-horizontal-gap-classes($values) {
+  @each $key, $value in $values {
+    [class*="hg#{$key}"] {
+      column-gap: $value;
+    }
+  }
+}
+
+@mixin generate-vertical-gap-classes($values) {
+  @each $key, $value in $values {
+    [class*="vg#{$key}"] {
+      row-gap: $value;
+    }
+  }
+}
+
+// Margin mixins
+@mixin generate-margin-top-classes($values) {
+  [class*="mt-auto"] {
+    margin-top: auto;
+  }
+  @each $key, $value in $values {
+    [class*="mt#{$key}"] {
+      margin-top: $value;
+    }
+  }
+}
+
+@mixin generate-margin-bottom-classes($values) {
+  [class*="mb-auto"] {
+    margin-bottom: auto;
+  }
+  @each $key, $value in $values {
+    [class*="mb#{$key}"] {
+      margin-bottom: $value;
+    }
+  }
+}
+
+@mixin generate-margin-block-classes($values) {
+  [class*="mv-auto"] {
+    margin-block: auto;
+  }
+  @each $key, $value in $values {
+    [class*="mv#{$key}"] {
+      margin-block: $value;
+    }
+  }
+}
+
+@mixin generate-margin-right-classes($values) {
+  [class*="mr-auto"] {
+    margin-right: auto;
+  }
+  @each $key, $value in $values {
+    [class*="mr#{$key}"] {
+      margin-right: $value;
+    }
+  }
+}
+
+@mixin generate-margin-left-classes($values) {
+  [class*="ml-auto"] {
+    margin-left: auto;
+  }
+  @each $key, $value in $values {
+    [class*="ml#{$key}"] {
+      margin-left: $value;
+    }
+  }
+}
+
+@mixin generate-margin-inline-classes($values) {
+  [class*="mh-auto"] {
+    margin-inline: auto;
+  }
+  @each $key, $value in $values {
+    [class*="mh#{$key}"] {
+      margin-inline: $value;
+    }
+  }
+}
+
+// Padding mixins
+@mixin generate-padding-classes($values) {
+  @each $key, $value in $values {
+    [class*="p#{$key}"] {
+      padding: $value;
+    }
+  }
+}
+
+@mixin generate-padding-block-classes($values) {
+  @each $key, $value in $values {
+    [class*="pv#{$key}"] {
+      padding-block: $value;
+    }
+  }
+}
+
+@mixin generate-padding-inline-classes($values) {
+  @each $key, $value in $values {
+    [class*="ph#{$key}"] {
+      padding-inline: $value;
+    }
+  }
+}
+
+@mixin generate-padding-top-classes($values) {
+  @each $key, $value in $values {
+    [class*="pt#{$key}"] {
+      padding-top: $value;
+    }
+  }
+}
+
+@mixin generate-padding-bottom-classes($values) {
+  @each $key, $value in $values {
+    [class*="pb#{$key}"] {
+      padding-bottom: $value;
+    }
+  }
+}
+
+@mixin generate-padding-right-classes($values) {
+  @each $key, $value in $values {
+    [class*="pr#{$key}"] {
+      padding-right: $value;
+    }
+  }
+}
+
+@mixin generate-padding-left-classes($values) {
+  @each $key, $value in $values {
+    [class*="pl#{$key}"] {
+      padding-left: $value;
+    }
+  }
+}
+
+// Gap classes
+@include generate-flex-gap-classes($gap-values);
+@include generate-horizontal-gap-classes($gap-values);
+@include generate-vertical-gap-classes($gap-values);
+
+// Margin classes
+@include generate-margin-top-classes($gap-values);
+@include generate-margin-bottom-classes($gap-values);
+@include generate-margin-block-classes($gap-values);
+@include generate-margin-right-classes($gap-values);
+@include generate-margin-left-classes($gap-values);
+@include generate-margin-inline-classes($gap-values);
+
+// Padding classes
+@include generate-padding-classes($gap-values);
+@include generate-padding-block-classes($gap-values);
+@include generate-padding-inline-classes($gap-values);
+@include generate-padding-top-classes($gap-values);
+@include generate-padding-bottom-classes($gap-values);
+@include generate-padding-right-classes($gap-values);
+@include generate-padding-left-classes($gap-values);

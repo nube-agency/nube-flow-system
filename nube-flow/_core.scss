@@ -1,0 +1,101 @@
+@use 'variables' as *;
+
+// Typography mixins
+@mixin generate-font-weight-classes($values) {
+  @each $key, $value in $values {
+    [class*="fw#{$key}"] {
+      font-weight: $value;
+    }
+  }
+}
+
+@mixin generate-line-height-classes($values) {
+  @each $key, $value in $values {
+    [class*="lh#{$key}"] {
+      line-height: $value;
+    }
+  }
+}
+
+@mixin generate-text-decoration-classes($values) {
+  @each $key, $value in $values {
+    [class*="td#{$key}"] {
+      text-decoration: $value;
+    }
+  }
+}
+
+@mixin generate-text-transform-classes($values) {
+  @each $key, $value in $values {
+    [class*="tt#{$key}"] {
+      text-transform: $value;
+    }
+  }
+}
+
+@mixin generate-text-wrap-classes() {
+  [class*="tw0"] {
+    text-wrap: wrap;
+  }
+  [class*="tw1"] {
+    text-wrap: balance;
+  }
+  [class*="tw2"] {
+    text-wrap: pretty;
+  }
+}
+
+@mixin generate-text-align-classes($prefix) {
+  [class*="#{$prefix}-ta0"] {
+    text-align: left;
+  }
+  [class*="#{$prefix}-ta1"] {
+    text-align: center;
+  }
+  [class*="#{$prefix}-ta2"] {
+    text-align: right;
+  }
+}
+
+// Border mixins
+@mixin generate-border-radius-classes($values) {
+  @each $key, $value in $values {
+    [class*="br#{$key}"] {
+      border-radius: $value;
+    }
+  }
+}
+
+@mixin generate-border-width-classes($values) {
+  @each $key, $value in $values {
+    [class*="bw#{$key}"] {
+      border-width: $value;
+    }
+  }
+}
+
+// Typography classes
+@include generate-font-weight-classes($font-weight-values);
+@include generate-line-height-classes($font-height-values);
+@include generate-text-decoration-classes($font-decoration-values);
+@include generate-text-transform-classes($font-transform-values);
+@include generate-text-wrap-classes();
+
+// Text align classes (responsive)
+@include generate-text-align-classes('xs');
+
+@media (min-width: $breakpoint-sm) {
+  @include generate-text-align-classes('sm');
+}
+
+@media (min-width: $breakpoint-md) {
+  @include generate-text-align-classes('md');
+}
+
+@media (min-width: $breakpoint-lg) {
+  @include generate-text-align-classes('lg');
+}
+
+// Border classes
+@include generate-border-radius-classes($radius-values);
+@include generate-border-width-classes($border-values);

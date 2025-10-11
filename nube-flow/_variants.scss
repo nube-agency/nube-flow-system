@@ -1,0 +1,10 @@
+// Attribute-based utilities
+@mixin generate-maxch-attributes($max: 80) {
+  @for $i from 1 through $max {
+    [maxch="#{$i}"] {
+      max-width: #{$i}ch;
+    }
+  }
+}
+
+@include generate-maxch-attributes(80);
