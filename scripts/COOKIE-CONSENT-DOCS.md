@@ -279,6 +279,81 @@ Wrap tracking scripts in containers with category attributes:
 
 ---
 
+## Programmatic API
+
+Access cookie consent system programmatically via `window.nf.cookies`:
+
+### Available Methods
+
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `openConsent()` | Opens the cookie consent banner | `void` |
+| `getConsent()` | Returns current consent data | `object` or `null` |
+| `updateConsent(categories)` | Updates consent with specified categories (reloads page) | `void` |
+| `acceptAll()` | Accepts all cookie categories | `void` |
+| `rejectAll()` | Rejects all non-essential cookies (reloads page) | `void` |
+| `revokeConsent()` | Completely removes consent and deletes all cookies (reloads page) | `void` |
+
+### Usage Examples
+
+**Open consent banner programmatically:**
+```javascript
+// From a footer "Cookie Settings" link
+document.querySelector('#cookie-settings-link').addEventListener('click', (e) => {
+  e.preventDefault();
+  window.nf.cookies.openConsent();
+});
+```
+
+**Check current consent:**
+```javascript
+const consent = window.nf.cookies.getConsent();
+if (consent && consent.categories.includes('analytics')) {
+  console.log('Analytics enabled');
+}
+```
+
+**Update consent categories:**
+```javascript
+// Enable only essentials and analytics
+window.nf.cookies.updateConsent(['essentials', 'analytics']);
+```
+
+**Accept all cookies:**
+```javascript
+window.nf.cookies.acceptAll();
+```
+
+**Revoke all consent (GDPR "Right to be Forgotten"):**
+```javascript
+// Complete reset - removes consent and deletes all cookies
+window.nf.cookies.revokeConsent();
+```
+
+### Custom Events
+
+Listen for banner interactions:
+
+| Event | When Fired | Detail Object |
+|-------|------------|---------------|
+| `nf-consent-banner-opened` | Banner is opened | `{ source: 'options-trigger' \| 'external-trigger' \| 'programmatic' }` |
+| `nf-consent-banner-closed` | Banner is closed | `{ action: string, categories: array }` |
+| `nf-consent-updated` | Consent preferences change | `{ categories: array }` |
+
+**Example: Track banner interactions:**
+```javascript
+window.addEventListener('nf-consent-banner-opened', (event) => {
+  console.log('Banner opened from:', event.detail.source);
+});
+
+window.addEventListener('nf-consent-banner-closed', (event) => {
+  console.log('User action:', event.detail.action);
+  console.log('Categories:', event.detail.categories);
+});
+```
+
+---
+
 ## Custom Triggers
 
 Add cookie settings link anywhere (e.g., footer):
@@ -288,6 +363,17 @@ Add cookie settings link anywhere (e.g., footer):
 ```
 
 Works on any element with `nf-cc="options-trigger"` attribute.
+
+**Or use JavaScript:**
+```html
+<a href="#" id="cookie-link">Cookie Settings</a>
+<script>
+document.getElementById('cookie-link').addEventListener('click', (e) => {
+  e.preventDefault();
+  window.nf.cookies.openConsent();
+});
+</script>
+```
 
 ---
 
@@ -303,7 +389,7 @@ The system automatically sends consent signals to:
 
 ### Custom Integration
 
-Listen for consent updates:
+Listen for consent updates using the `nf-consent-updated` event:
 
 ```javascript
 window.addEventListener('nf-consent-updated', (event) => {
@@ -315,6 +401,15 @@ window.addEventListener('nf-consent-updated', (event) => {
     // Initialize your analytics tool
   }
 });
+```
+
+Or check consent status programmatically:
+
+```javascript
+const consent = window.nf.cookies.getConsent();
+if (consent && consent.categories.includes('marketing')) {
+  // Initialize marketing tools
+}
 ```
 
 ---

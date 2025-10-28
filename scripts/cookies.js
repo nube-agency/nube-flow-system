@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  // Create global namespace for programmatic access
+  const cookieSystem = ((window.nf ??= {}).cookies ??= {});
+
   const currentScript = document.currentScript;
   const sourcePath = currentScript?.getAttribute('nf-source');
   const includeTrigger = currentScript?.getAttribute('nf-trigger') === 'true';
@@ -290,6 +293,9 @@
     if (optionsTrigger) {
       optionsTrigger.addEventListener('click', () => {
         cookiesCard.classList.add('options-open');
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-opened', {
+          detail: { source: 'options-trigger' }
+        }));
       });
     }
 
@@ -302,6 +308,9 @@
         if (cookiesTrigger) {
           hideElement(cookiesTrigger);
         }
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-opened', {
+          detail: { source: 'external-trigger' }
+        }));
       });
     });
 
@@ -309,6 +318,9 @@
       optionsSave.addEventListener('click', () => {
         const activeCategories = getActiveCategories(cookiesCard);
         saveConsent(activeCategories, true);
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+          detail: { action: 'save', categories: activeCategories }
+        }));
         window.location.reload();
       });
     }
@@ -322,6 +334,9 @@
         if (cookiesTrigger) {
           showElement(cookiesTrigger);
         }
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+          detail: { action: 'accept', categories: allCategories }
+        }));
       });
     }
 
@@ -329,6 +344,9 @@
       rejectBtn.addEventListener('click', () => {
         const essentialsOnly = ['essentials'];
         saveConsent(essentialsOnly, true);
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+          detail: { action: 'reject', categories: essentialsOnly }
+        }));
         window.location.reload();
       });
     }
@@ -408,6 +426,59 @@
       }
 
       setupUIInteractions(cookiesCard, cookiesTrigger, isOptOut, isFirstVisit);
+
+      // Expose global API
+      cookieSystem.openConsent = function() {
+        showElement(cookiesCard);
+        cookiesCard.classList.add('options-open');
+        if (cookiesTrigger) {
+          hideElement(cookiesTrigger);
+        }
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-opened', {
+          detail: { source: 'programmatic' }
+        }));
+      };
+
+      cookieSystem.getConsent = function() {
+        return loadConsent();
+      };
+
+      cookieSystem.updateConsent = function(categories) {
+        if (!Array.isArray(categories)) {
+          console.error('updateConsent requires an array of categories');
+          return;
+        }
+        saveConsent(categories, true);
+        window.location.reload();
+      };
+
+      cookieSystem.revokeConsent = function() {
+        localStorage.removeItem('nf-cookie-consent');
+        deleteAllCookies();
+        window.location.reload();
+      };
+
+      cookieSystem.acceptAll = function() {
+        const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
+        saveConsent(allCategories);
+        loadScripts(allCategories);
+        hideElement(cookiesCard);
+        if (cookiesTrigger) {
+          showElement(cookiesTrigger);
+        }
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+          detail: { action: 'accept-all-programmatic', categories: allCategories }
+        }));
+      };
+
+      cookieSystem.rejectAll = function() {
+        const essentialsOnly = ['essentials'];
+        saveConsent(essentialsOnly, true);
+        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+          detail: { action: 'reject-all-programmatic', categories: essentialsOnly }
+        }));
+        window.location.reload();
+      };
     })
     .catch(error => {
       console.error('Cookie script error:', error);
