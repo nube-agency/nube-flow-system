@@ -28,12 +28,6 @@ $font-weight-2: var(--font--weight--2);
 $font-weight-3: var(--font--weight--3);
 $font-weight-4: var(--font--weight--4);
 
-$font-height-0: var(--font--height--0);
-$font-height-1: var(--font--height--1);
-$font-height-2: var(--font--height--2);
-$font-height-3: var(--font--height--3);
-$font-height-4: var(--font--height--4);
-
 $font-decoration-none: var(--font--decoration--none);
 $font-decoration-underline: var(--font--decoration--underline);
 
@@ -78,14 +72,6 @@ $font-weight-values: (
   2: $font-weight-2,
   3: $font-weight-3,
   4: $font-weight-4,
-);
-
-$font-height-values: (
-  0: $font-height-0,
-  1: $font-height-1,
-  2: $font-height-2,
-  3: $font-height-3,
-  4: $font-height-4,
 );
 
 $font-decoration-values: (

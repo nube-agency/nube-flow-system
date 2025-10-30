@@ -1,135 +1,135 @@
-@use 'variables' as *;
+@use "variables" as *;
 
 // Flex mixins
 @mixin generate-flex-order-classes($prefix) {
-  [class*="#{$prefix}-of"] {
+  [class*="of-#{$prefix}"] {
     order: -999;
   }
-  [class*="#{$prefix}-o1"] {
+  [class*="o1-#{$prefix}"] {
     order: 1;
   }
-  [class*="#{$prefix}-o2"] {
+  [class*="o2-#{$prefix}"] {
     order: 2;
   }
-  [class*="#{$prefix}-o3"] {
+  [class*="o3-#{$prefix}"] {
     order: 3;
   }
-  [class*="#{$prefix}-o4"] {
+  [class*="o4-#{$prefix}"] {
     order: 4;
   }
-  [class*="#{$prefix}-o5"] {
+  [class*="o5-#{$prefix}"] {
     order: 5;
   }
-  [class*="#{$prefix}-o6"] {
+  [class*="o6-#{$prefix}"] {
     order: 6;
   }
-  [class*="#{$prefix}-ol"] {
+  [class*="ol-#{$prefix}"] {
     order: 999;
   }
 }
 
 @mixin generate-flex-direction-classes($prefix) {
-  [class*="#{$prefix}-fd0"] {
+  [class*="fd0-#{$prefix}"] {
     flex-direction: column;
   }
-  [class*="#{$prefix}-fd1"] {
+  [class*="fd1-#{$prefix}"] {
     flex-direction: row;
   }
-  [class*="#{$prefix}-fd2"] {
+  [class*="fd2-#{$prefix}"] {
     flex-direction: column-reverse;
   }
-  [class*="#{$prefix}-fd3"] {
+  [class*="fd3-#{$prefix}"] {
     flex-direction: row-reverse;
   }
 }
 
 @mixin generate-justify-content-classes($prefix) {
-  [class*="#{$prefix}-fj0"] {
+  [class*="fj0-#{$prefix}"] {
     justify-content: start;
   }
-  [class*="#{$prefix}-fj1"] {
+  [class*="fj1-#{$prefix}"] {
     justify-content: center;
   }
-  [class*="#{$prefix}-fj2"] {
+  [class*="fj2-#{$prefix}"] {
     justify-content: end;
   }
-  [class*="#{$prefix}-fj3"] {
+  [class*="fj3-#{$prefix}"] {
     justify-content: space-between;
   }
-  [class*="#{$prefix}-fj4"] {
+  [class*="fj4-#{$prefix}"] {
     justify-content: space-around;
   }
-  [class*="#{$prefix}-fj5"] {
+  [class*="fj5-#{$prefix}"] {
     justify-content: space-evenly;
   }
 }
 
 @mixin generate-align-items-classes($prefix) {
-  [class*="#{$prefix}-fa0"] {
+  [class*="fa0-#{$prefix}"] {
     align-items: start;
   }
-  [class*="#{$prefix}-fa1"] {
+  [class*="fa1-#{$prefix}"] {
     align-items: center;
   }
-  [class*="#{$prefix}-fa2"] {
+  [class*="fa2-#{$prefix}"] {
     align-items: end;
   }
-  [class*="#{$prefix}-fa3"] {
+  [class*="fa3-#{$prefix}"] {
     align-items: stretch;
   }
-  [class*="#{$prefix}-fa4"] {
+  [class*="fa4-#{$prefix}"] {
     align-items: baseline;
   }
 }
 
 @mixin generate-flex-wrap-classes($prefix) {
-  [class*="#{$prefix}-fwr0"] {
+  [class*="fwr0-#{$prefix}"] {
     flex-wrap: nowrap;
   }
-  [class*="#{$prefix}-fwr1"] {
+  [class*="fwr1-#{$prefix}"] {
     flex-wrap: wrap;
   }
-  [class*="#{$prefix}-fwr2"] {
+  [class*="fwr2-#{$prefix}"] {
     flex-wrap: wrap-reverse;
   }
 }
 
 // Non-responsive utilities
-[class*="sa0"] {
+[class*="as0"] {
   align-self: auto;
 }
-[class*="sa1"] {
+[class*="as1"] {
   align-self: flex-start;
 }
-[class*="sa2"] {
+[class*="as2"] {
   align-self: center;
 }
-[class*="sa3"] {
+[class*="as3"] {
   align-self: flex-end;
 }
-[class*="sa4"] {
+[class*="as4"] {
   align-self: stretch;
 }
-[class*="sa5"] {
+[class*="as5"] {
   align-self: baseline;
 }
 
-[class*="sj0"] {
+[class*="js0"] {
   justify-self: auto;
 }
-[class*="sj1"] {
+[class*="js1"] {
   justify-self: flex-start;
 }
-[class*="sj2"] {
+[class*="js2"] {
   justify-self: center;
 }
-[class*="sj3"] {
+[class*="js3"] {
   justify-self: flex-end;
 }
-[class*="sj4"] {
+[class*="js4"] {
   justify-self: stretch;
 }
-[class*="sj5"] {
+[class*="js5"] {
   justify-self: baseline;
 }
 
@@ -149,35 +149,35 @@
 
 // Responsive flex classes
 // XS
-@include generate-flex-order-classes('xs');
-@include generate-flex-direction-classes('xs');
-@include generate-justify-content-classes('xs');
-@include generate-align-items-classes('xs');
-@include generate-flex-wrap-classes('xs');
+@include generate-flex-order-classes("xs");
+@include generate-flex-direction-classes("xs");
+@include generate-justify-content-classes("xs");
+@include generate-align-items-classes("xs");
+@include generate-flex-wrap-classes("xs");
 
 // SM
 @media (min-width: $breakpoint-sm) {
-  @include generate-flex-order-classes('sm');
-  @include generate-flex-direction-classes('sm');
-  @include generate-justify-content-classes('sm');
-  @include generate-align-items-classes('sm');
-  @include generate-flex-wrap-classes('sm');
+  @include generate-flex-order-classes("sm");
+  @include generate-flex-direction-classes("sm");
+  @include generate-justify-content-classes("sm");
+  @include generate-align-items-classes("sm");
+  @include generate-flex-wrap-classes("sm");
 }
 
 // MD
 @media (min-width: $breakpoint-md) {
-  @include generate-flex-order-classes('md');
-  @include generate-flex-direction-classes('md');
-  @include generate-justify-content-classes('md');
-  @include generate-align-items-classes('md');
-  @include generate-flex-wrap-classes('md');
+  @include generate-flex-order-classes("md");
+  @include generate-flex-direction-classes("md");
+  @include generate-justify-content-classes("md");
+  @include generate-align-items-classes("md");
+  @include generate-flex-wrap-classes("md");
 }
 
 // LG
 @media (min-width: $breakpoint-lg) {
-  @include generate-flex-order-classes('lg');
-  @include generate-flex-direction-classes('lg');
-  @include generate-justify-content-classes('lg');
-  @include generate-align-items-classes('lg');
-  @include generate-flex-wrap-classes('lg');
+  @include generate-flex-order-classes("lg");
+  @include generate-flex-direction-classes("lg");
+  @include generate-justify-content-classes("lg");
+  @include generate-align-items-classes("lg");
+  @include generate-flex-wrap-classes("lg");
 }

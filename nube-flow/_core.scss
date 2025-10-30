@@ -1,18 +1,10 @@
-@use 'variables' as *;
+@use "variables" as *;
 
 // Typography mixins
 @mixin generate-font-weight-classes($values) {
   @each $key, $value in $values {
     [class*="fw#{$key}"] {
       font-weight: $value;
-    }
-  }
-}
-
-@mixin generate-line-height-classes($values) {
-  @each $key, $value in $values {
-    [class*="lh#{$key}"] {
-      line-height: $value;
     }
   }
 }
@@ -45,14 +37,26 @@
   }
 }
 
-@mixin generate-text-align-classes($prefix) {
-  [class*="#{$prefix}-ta0"] {
+@mixin generate-text-align-classes() {
+  [class*="ta0"] {
     text-align: left;
   }
-  [class*="#{$prefix}-ta1"] {
+  [class*="ta1"] {
     text-align: center;
   }
-  [class*="#{$prefix}-ta2"] {
+  [class*="ta2"] {
+    text-align: right;
+  }
+}
+
+@mixin generate-responsive-text-align-classes($prefix) {
+  [class*="ta0-#{$prefix}"] {
+    text-align: left;
+  }
+  [class*="ta1-#{$prefix}"] {
+    text-align: center;
+  }
+  [class*="ta2-#{$prefix}"] {
     text-align: right;
   }
 }
@@ -76,24 +80,24 @@
 
 // Typography classes
 @include generate-font-weight-classes($font-weight-values);
-@include generate-line-height-classes($font-height-values);
 @include generate-text-decoration-classes($font-decoration-values);
 @include generate-text-transform-classes($font-transform-values);
 @include generate-text-wrap-classes();
+@include generate-text-align-classes();
 
 // Text align classes (responsive)
-@include generate-text-align-classes('xs');
+@include generate-responsive-text-align-classes("xs");
 
 @media (min-width: $breakpoint-sm) {
-  @include generate-text-align-classes('sm');
+  @include generate-responsive-text-align-classes("sm");
 }
 
 @media (min-width: $breakpoint-md) {
-  @include generate-text-align-classes('md');
+  @include generate-responsive-text-align-classes("md");
 }
 
 @media (min-width: $breakpoint-lg) {
-  @include generate-text-align-classes('lg');
+  @include generate-responsive-text-align-classes("lg");
 }
 
 // Border classes

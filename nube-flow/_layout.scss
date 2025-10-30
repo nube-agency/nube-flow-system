@@ -1,7 +1,7 @@
 @use "variables" as *;
 
 // Grid system
-[class*="rw"] {
+[class*="lyt"] {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(
@@ -23,213 +23,213 @@
   --clm-min: 5;
 }
 
-[class*="rw-fill"] {
+[class*="lyt-fill"] {
   --rw: auto-fill;
 }
 
-[class*="rw-fit"] {
+[class*="lyt-fit"] {
   --rw: auto-fit;
 }
 
-[class*="rw-fix"] {
+[class*="lyt-fix"] {
   grid-template-columns: repeat(var(--clm-count), 1fr) !important;
 }
 
-[class*="rw"][class*="1clm"] {
+[class*="lyt"][class*="1clm"] {
   --clm-count: 1;
 }
 
-[class*="rw"][class*="2clm"] {
+[class*="lyt"][class*="2clm"] {
   --clm-count: 2;
 }
 
-[class*="rw"][class*="3clm"] {
+[class*="lyt"][class*="3clm"] {
   --clm-count: 3;
 }
 
-[class*="rw"][class*="4clm"] {
+[class*="lyt"][class*="4clm"] {
   --clm-count: 4;
 }
 
-[class*="rw"][class*="5clm"] {
+[class*="lyt"][class*="5clm"] {
   --clm-count: 5;
 }
 
-[class*="rw"][class*="6clm"] {
+[class*="lyt"][class*="6clm"] {
   --clm-count: 6;
 }
 
-[class*="rw"][class*="7clm"] {
+[class*="lyt"][class*="7clm"] {
   --clm-count: 7;
 }
 
-[class*="rw"][class*="8clm"] {
+[class*="lyt"][class*="8clm"] {
   --clm-count: 8;
 }
 
-[class*="rw"][class*="9clm"] {
+[class*="lyt"][class*="9clm"] {
   --clm-count: 9;
 }
 
-[class*="rw"][class*="10clm"] {
+[class*="lyt"][class*="10clm"] {
   --clm-count: 10;
 }
 
-[class*="rw"][class*="11clm"] {
+[class*="lyt"][class*="11clm"] {
   --clm-count: 11;
 }
 
-[class*="rw"][class*="12clm"] {
+[class*="lyt"][class*="12clm"] {
   --clm-count: 12;
 }
 
 // Grid child utilities - column span
-[class*="rw"] > [class*="clm1"] {
+[class*="lyt"] > [class*="clm1"] {
   grid-column-end: span 1;
 }
 
-[class*="rw"] > [class*="clm2"] {
+[class*="lyt"] > [class*="clm2"] {
   grid-column-end: span 2;
 }
 
-[class*="rw"] > [class*="clm3"] {
+[class*="lyt"] > [class*="clm3"] {
   grid-column-end: span 3;
 }
 
-[class*="rw"] > [class*="clm4"] {
+[class*="lyt"] > [class*="clm4"] {
   grid-column-end: span 4;
 }
 
-[class*="rw"] > [class*="clm5"] {
+[class*="lyt"] > [class*="clm5"] {
   grid-column-end: span 5;
 }
 
-[class*="rw"] > [class*="clm6"] {
+[class*="lyt"] > [class*="clm6"] {
   grid-column-end: span 6;
 }
 
-[class*="rw"] > [class*="clm7"] {
+[class*="lyt"] > [class*="clm7"] {
   grid-column-end: span 7;
 }
 
-[class*="rw"] > [class*="clm8"] {
+[class*="lyt"] > [class*="clm8"] {
   grid-column-end: span 8;
 }
 
-[class*="rw"] > [class*="clm9"] {
+[class*="lyt"] > [class*="clm9"] {
   grid-column-end: span 9;
 }
 
-[class*="rw"] > [class*="clm10"] {
+[class*="lyt"] > [class*="clm10"] {
   grid-column-end: span 10;
 }
 
-[class*="rw"] > [class*="clm11"] {
+[class*="lyt"] > [class*="clm11"] {
   grid-column-end: span 11;
 }
 
-[class*="rw"] > [class*="clm12"] {
+[class*="lyt"] > [class*="clm12"] {
   grid-column-end: span 12;
 }
 
-[class*="rw"] > [class*="clm-full"] {
+[class*="lyt"] > [class*="clm-full"] {
   grid-column-start: 1;
   grid-column-end: -1;
 }
 
-[class*="rw"] > [class*="clm-indent"] {
+[class*="lyt"] > [class*="clm-indent"] {
   grid-column-start: 2;
   grid-column-end: -2;
 }
 
 // Grid child utilities - column start
-[class*="rw"] > [class*="clm-s-auto"] {
+[class*="lyt"] > [class*="clm-s-auto"] {
   grid-column-start: auto;
 }
 
-[class*="rw"] > [class*="clm-s1"] {
+[class*="lyt"] > [class*="clm-s1"] {
   grid-column-start: 1;
 }
 
-[class*="rw"] > [class*="clm-s2"] {
+[class*="lyt"] > [class*="clm-s2"] {
   grid-column-start: 2;
 }
 
-[class*="rw"] > [class*="clm-s3"] {
+[class*="lyt"] > [class*="clm-s3"] {
   grid-column-start: 3;
 }
 
-[class*="rw"] > [class*="clm-s4"] {
+[class*="lyt"] > [class*="clm-s4"] {
   grid-column-start: 4;
 }
 
-[class*="rw"] > [class*="clm-s5"] {
+[class*="lyt"] > [class*="clm-s5"] {
   grid-column-start: 5;
 }
 
-[class*="rw"] > [class*="clm-s6"] {
+[class*="lyt"] > [class*="clm-s6"] {
   grid-column-start: 6;
 }
 
-[class*="rw"] > [class*="clm-s7"] {
+[class*="lyt"] > [class*="clm-s7"] {
   grid-column-start: 7;
 }
 
-[class*="rw"] > [class*="clm-s8"] {
+[class*="lyt"] > [class*="clm-s8"] {
   grid-column-start: 8;
 }
 
-[class*="rw"] > [class*="clm-s9"] {
+[class*="lyt"] > [class*="clm-s9"] {
   grid-column-start: 9;
 }
 
-[class*="rw"] > [class*="clm-s10"] {
+[class*="lyt"] > [class*="clm-s10"] {
   grid-column-start: 10;
 }
 
-[class*="rw"] > [class*="clm-s11"] {
+[class*="lyt"] > [class*="clm-s11"] {
   grid-column-start: 11;
 }
 
-[class*="rw"] > [class*="clm-s12"] {
+[class*="lyt"] > [class*="clm-s12"] {
   grid-column-start: 12;
 }
 
 // Grid child utilities - row span
-[class*="rw"] > [class*="rw1"] {
+[class*="lyt"] > [class*="rw1"] {
   grid-row-end: span 1;
 }
 
-[class*="rw"] > [class*="rw2"] {
+[class*="lyt"] > [class*="rw2"] {
   grid-row-end: span 2;
 }
 
-[class*="rw"] > [class*="rw3"] {
+[class*="lyt"] > [class*="rw3"] {
   grid-row-end: span 3;
 }
 
-[class*="rw"] > [class*="rw4"] {
+[class*="lyt"] > [class*="rw4"] {
   grid-row-end: span 4;
 }
 
 // Grid child utilities - row start
-[class*="rw"] > [class*="rw-s-auto"] {
+[class*="lyt"] > [class*="lyt-s-auto"] {
   grid-row-start: auto;
 }
 
-[class*="rw"] > [class*="rw-s1"] {
+[class*="lyt"] > [class*="lyt-s1"] {
   grid-row-start: 1;
 }
 
-[class*="rw"] > [class*="rw-s2"] {
+[class*="lyt"] > [class*="lyt-s2"] {
   grid-row-start: 2;
 }
 
-[class*="rw"] > [class*="rw-s3"] {
+[class*="lyt"] > [class*="lyt-s3"] {
   grid-row-start: 3;
 }
 
-[class*="rw"] > [class*="rw-s4"] {
+[class*="lyt"] > [class*="lyt-s4"] {
   grid-row-start: 4;
 }
 
