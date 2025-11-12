@@ -283,7 +283,7 @@
 [class*="mw2"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 10 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.1666) - 10 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -291,7 +291,7 @@
 [class*="mw3"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 9 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.25) - 9 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -299,7 +299,7 @@
 [class*="mw4"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 8 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.3333) - 8 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -307,7 +307,7 @@
 [class*="mw5"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 7 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.4166) - 7 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -315,7 +315,7 @@
 [class*="mw6"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 6 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.5) - 6 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -323,7 +323,7 @@
 [class*="mw7"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 5 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.5833) - 5 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -331,7 +331,7 @@
 [class*="mw8"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 4 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.6666) - 4 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -339,7 +339,7 @@
 [class*="mw9"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 3 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.75) - 3 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -347,7 +347,7 @@
 [class*="mw10"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 2 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.8333) - 2 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
@@ -355,7 +355,7 @@
 [class*="mw11"] {
   width: 100%;
   max-width: calc(
-    (var(--layout--width) * 0.0833) - 1 * (var(--layout--gutter) / 12)
+    (var(--layout--width) * 0.9166) - 1 * (var(--layout--gutter) / 12)
   );
   margin-inline: auto;
 }
