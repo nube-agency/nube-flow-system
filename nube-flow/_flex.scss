@@ -94,7 +94,150 @@
   }
 }
 
-// Non-responsive utilities
+@mixin generate-align-self-classes($prefix) {
+  [class*="as0-#{$prefix}"] {
+    align-self: auto;
+  }
+  [class*="as1-#{$prefix}"] {
+    align-self: flex-start;
+  }
+  [class*="as2-#{$prefix}"] {
+    align-self: center;
+  }
+  [class*="as3-#{$prefix}"] {
+    align-self: flex-end;
+  }
+  [class*="as4-#{$prefix}"] {
+    align-self: stretch;
+  }
+  [class*="as5-#{$prefix}"] {
+    align-self: baseline;
+  }
+}
+
+@mixin generate-justify-self-classes($prefix) {
+  [class*="js0-#{$prefix}"] {
+    justify-self: auto;
+  }
+  [class*="js1-#{$prefix}"] {
+    justify-self: flex-start;
+  }
+  [class*="js2-#{$prefix}"] {
+    justify-self: center;
+  }
+  [class*="js3-#{$prefix}"] {
+    justify-self: flex-end;
+  }
+  [class*="js4-#{$prefix}"] {
+    justify-self: stretch;
+  }
+  [class*="js5-#{$prefix}"] {
+    justify-self: baseline;
+  }
+}
+
+@mixin generate-flex-grow-classes($prefix) {
+  [class*="grow-0-#{$prefix}"] {
+    flex-grow: 0;
+  }
+  [class*="grow-1-#{$prefix}"] {
+    flex-grow: 1;
+  }
+}
+
+@mixin generate-flex-shrink-classes($prefix) {
+  [class*="shrink-0-#{$prefix}"] {
+    flex-shrink: 0;
+  }
+  [class*="shrink-1-#{$prefix}"] {
+    flex-shrink: 1;
+  }
+}
+
+// Static utilities (apply to all breakpoints unless overridden)
+[class*="of"] {
+  order: -999;
+}
+[class*="o1"] {
+  order: 1;
+}
+[class*="o2"] {
+  order: 2;
+}
+[class*="o3"] {
+  order: 3;
+}
+[class*="o4"] {
+  order: 4;
+}
+[class*="o5"] {
+  order: 5;
+}
+[class*="o6"] {
+  order: 6;
+}
+[class*="ol"] {
+  order: 999;
+}
+
+[class*="fd0"] {
+  flex-direction: column;
+}
+[class*="fd1"] {
+  flex-direction: row;
+}
+[class*="fd2"] {
+  flex-direction: column-reverse;
+}
+[class*="fd3"] {
+  flex-direction: row-reverse;
+}
+
+[class*="fj0"] {
+  justify-content: start;
+}
+[class*="fj1"] {
+  justify-content: center;
+}
+[class*="fj2"] {
+  justify-content: end;
+}
+[class*="fj3"] {
+  justify-content: space-between;
+}
+[class*="fj4"] {
+  justify-content: space-around;
+}
+[class*="fj5"] {
+  justify-content: space-evenly;
+}
+
+[class*="fa0"] {
+  align-items: start;
+}
+[class*="fa1"] {
+  align-items: center;
+}
+[class*="fa2"] {
+  align-items: end;
+}
+[class*="fa3"] {
+  align-items: stretch;
+}
+[class*="fa4"] {
+  align-items: baseline;
+}
+
+[class*="fwr0"] {
+  flex-wrap: nowrap;
+}
+[class*="fwr1"] {
+  flex-wrap: wrap;
+}
+[class*="fwr2"] {
+  flex-wrap: wrap-reverse;
+}
+
 [class*="as0"] {
   align-self: auto;
 }
@@ -148,13 +291,6 @@
 }
 
 // Responsive flex classes
-// XS
-@include generate-flex-order-classes("xs");
-@include generate-flex-direction-classes("xs");
-@include generate-justify-content-classes("xs");
-@include generate-align-items-classes("xs");
-@include generate-flex-wrap-classes("xs");
-
 // SM
 @media (min-width: $breakpoint-sm) {
   @include generate-flex-order-classes("sm");
@@ -162,6 +298,10 @@
   @include generate-justify-content-classes("sm");
   @include generate-align-items-classes("sm");
   @include generate-flex-wrap-classes("sm");
+  @include generate-align-self-classes("sm");
+  @include generate-justify-self-classes("sm");
+  @include generate-flex-grow-classes("sm");
+  @include generate-flex-shrink-classes("sm");
 }
 
 // MD
@@ -171,6 +311,10 @@
   @include generate-justify-content-classes("md");
   @include generate-align-items-classes("md");
   @include generate-flex-wrap-classes("md");
+  @include generate-align-self-classes("md");
+  @include generate-justify-self-classes("md");
+  @include generate-flex-grow-classes("md");
+  @include generate-flex-shrink-classes("md");
 }
 
 // LG
@@ -180,4 +324,8 @@
   @include generate-justify-content-classes("lg");
   @include generate-align-items-classes("lg");
   @include generate-flex-wrap-classes("lg");
+  @include generate-align-self-classes("lg");
+  @include generate-justify-self-classes("lg");
+  @include generate-flex-grow-classes("lg");
+  @include generate-flex-shrink-classes("lg");
 }

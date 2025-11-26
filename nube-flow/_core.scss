@@ -25,31 +25,19 @@
   }
 }
 
-@mixin generate-text-wrap-classes() {
-  [class*="tw0"] {
+@mixin generate-text-wrap-classes($prefix) {
+  [class*="tw0-#{$prefix}"] {
     text-wrap: wrap;
   }
-  [class*="tw1"] {
+  [class*="tw1-#{$prefix}"] {
     text-wrap: balance;
   }
-  [class*="tw2"] {
+  [class*="tw2-#{$prefix}"] {
     text-wrap: pretty;
   }
 }
 
-@mixin generate-text-align-classes() {
-  [class*="ta0"] {
-    text-align: left;
-  }
-  [class*="ta1"] {
-    text-align: center;
-  }
-  [class*="ta2"] {
-    text-align: right;
-  }
-}
-
-@mixin generate-responsive-text-align-classes($prefix) {
+@mixin generate-text-align-classes($prefix) {
   [class*="ta0-#{$prefix}"] {
     text-align: left;
   }
@@ -58,6 +46,22 @@
   }
   [class*="ta2-#{$prefix}"] {
     text-align: right;
+  }
+}
+
+@mixin generate-text-decoration-responsive-classes($values, $prefix) {
+  @each $key, $value in $values {
+    [class*="td#{$key}-#{$prefix}"] {
+      text-decoration: $value;
+    }
+  }
+}
+
+@mixin generate-text-transform-responsive-classes($values, $prefix) {
+  @each $key, $value in $values {
+    [class*="tt#{$key}-#{$prefix}"] {
+      text-transform: $value;
+    }
   }
 }
 
@@ -78,26 +82,148 @@
   }
 }
 
-// Typography classes
+// Typography classes (non-responsive)
 @include generate-font-weight-classes($font-weight-values);
+
+// Line height utility (flush for icons/labels)
+[class*="lh100"] {
+  line-height: 1;
+}
+
+// Line clamp utilities
+[class*="lc1"] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+[class*="lc2"] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+[class*="lc3"] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+[class*="lc4"] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+[class*="lc5"] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+}
+[class*="lc6"] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
+}
+
+// White space utilities
+[class*="ws0"] {
+  white-space: normal;
+}
+[class*="ws1"] {
+  white-space: nowrap;
+}
+[class*="ws2"] {
+  white-space: pre;
+}
+[class*="ws3"] {
+  white-space: pre-wrap;
+}
+
+// Word break utilities
+[class*="wb0"] {
+  word-break: normal;
+}
+[class*="wb1"] {
+  word-break: break-all;
+}
+[class*="wb2"] {
+  word-break: keep-all;
+}
+[class*="wb3"] {
+  overflow-wrap: break-word;
+}
+
+// Static typography utilities (mobile-first base)
 @include generate-text-decoration-classes($font-decoration-values);
 @include generate-text-transform-classes($font-transform-values);
-@include generate-text-wrap-classes();
-@include generate-text-align-classes();
 
-// Text align classes (responsive)
-@include generate-responsive-text-align-classes("xs");
+[class*="tw0"] {
+  text-wrap: wrap;
+}
+[class*="tw1"] {
+  text-wrap: balance;
+}
+[class*="tw2"] {
+  text-wrap: pretty;
+}
 
+[class*="ta0"] {
+  text-align: left;
+}
+[class*="ta1"] {
+  text-align: center;
+}
+[class*="ta2"] {
+  text-align: right;
+}
+
+// Responsive typography classes
 @media (min-width: $breakpoint-sm) {
-  @include generate-responsive-text-align-classes("sm");
+  @include generate-text-decoration-responsive-classes(
+    $font-decoration-values,
+    "sm"
+  );
+  @include generate-text-transform-responsive-classes(
+    $font-transform-values,
+    "sm"
+  );
+  @include generate-text-wrap-classes("sm");
+  @include generate-text-align-classes("sm");
 }
 
 @media (min-width: $breakpoint-md) {
-  @include generate-responsive-text-align-classes("md");
+  @include generate-text-decoration-responsive-classes(
+    $font-decoration-values,
+    "md"
+  );
+  @include generate-text-transform-responsive-classes(
+    $font-transform-values,
+    "md"
+  );
+  @include generate-text-wrap-classes("md");
+  @include generate-text-align-classes("md");
 }
 
 @media (min-width: $breakpoint-lg) {
-  @include generate-responsive-text-align-classes("lg");
+  @include generate-text-decoration-responsive-classes(
+    $font-decoration-values,
+    "lg"
+  );
+  @include generate-text-transform-responsive-classes(
+    $font-transform-values,
+    "lg"
+  );
+  @include generate-text-wrap-classes("lg");
+  @include generate-text-align-classes("lg");
 }
 
 // Border classes
