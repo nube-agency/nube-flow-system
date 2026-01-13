@@ -5,16 +5,10 @@
   const cookieSystem = ((window.nf ??= {}).cookies ??= {});
 
   const currentScript = document.currentScript;
-  const sourcePath = currentScript?.getAttribute('nf-source');
   const includeTrigger = currentScript?.getAttribute('nf-trigger') === 'true';
   const isOptOut = currentScript?.getAttribute('nf-optout') === 'true';
   const consentExpiry = parseInt(currentScript?.getAttribute('nf-consent-expiry') || '30', 10);
   const consentVersion = currentScript?.getAttribute('nf-consent-version') || '1.0';
-
-  if (!sourcePath) {
-    console.error('Cookie script: nf-source attribute is required');
-    return;
-  }
 
   function hideElement(element) {
     if (!element) return;
@@ -365,122 +359,116 @@
     });
   }
 
-  fetch(sourcePath)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch cookie component: ${response.status}`);
+  function init() {
+    const cookiesCard = document.querySelector('[nf-cc="card"]');
+
+    if (!cookiesCard) {
+      console.error('Cookie script: Cookie card ([nf-cc="card"]) not found in page');
+      return;
+    }
+
+    cookiesCard.classList.remove('options-open');
+
+    let cookiesTrigger = null;
+
+    if (includeTrigger) {
+      cookiesTrigger = document.querySelector('.cookies_trigger');
+      if (cookiesTrigger) {
+        hideElement(cookiesTrigger);
       }
-      return response.text();
-    })
-    .then(html => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const cookiesCard = doc.querySelector('[nf-cc="card"]');
+    }
 
-      if (!cookiesCard) {
-        throw new Error('Cookie card ([nf-cc="card"]) not found in source page');
-      }
+    const savedConsent = loadConsent();
+    const isFirstVisit = !savedConsent || !savedConsent.categories;
 
-      cookiesCard.classList.remove('options-open');
-      document.body.appendChild(cookiesCard);
-
-      let cookiesTrigger = null;
-
-      if (includeTrigger) {
-        cookiesTrigger = doc.querySelector('.cookies_trigger');
-        if (cookiesTrigger) {
-          document.body.appendChild(cookiesTrigger);
-          hideElement(cookiesTrigger);
-        }
-      }
-
-      const savedConsent = loadConsent();
-      const isFirstVisit = !savedConsent || !savedConsent.categories;
-
-      if (savedConsent && savedConsent.categories) {
-        if (savedConsent.clearCookiesOnLoad) {
-          deleteAllCookies();
-          saveConsent(savedConsent.categories, false);
-        }
-
-        const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
-        allCategories.forEach(category => {
-          const optionElement = cookiesCard.querySelector(`[nf-cc="${category}"]`);
-          if (optionElement) {
-            if (savedConsent.categories.includes(category)) {
-              optionElement.classList.add('option-active');
-            } else {
-              optionElement.classList.remove('option-active');
-            }
-          }
-        });
-
-        hideElement(cookiesCard);
-        if (cookiesTrigger) {
-          showElement(cookiesTrigger);
-        }
-        loadScripts(savedConsent.categories);
-      } else if (isOptOut) {
-        const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
-        loadScripts(allCategories);
-      }
-
-      setupUIInteractions(cookiesCard, cookiesTrigger, isOptOut, isFirstVisit);
-
-      // Expose global API
-      cookieSystem.openConsent = function() {
-        showElement(cookiesCard);
-        cookiesCard.classList.add('options-open');
-        if (cookiesTrigger) {
-          hideElement(cookiesTrigger);
-        }
-        window.dispatchEvent(new CustomEvent('nf-consent-banner-opened', {
-          detail: { source: 'programmatic' }
-        }));
-      };
-
-      cookieSystem.getConsent = function() {
-        return loadConsent();
-      };
-
-      cookieSystem.updateConsent = function(categories) {
-        if (!Array.isArray(categories)) {
-          console.error('updateConsent requires an array of categories');
-          return;
-        }
-        saveConsent(categories, true);
-        window.location.reload();
-      };
-
-      cookieSystem.revokeConsent = function() {
-        localStorage.removeItem('nf-cookie-consent');
+    if (savedConsent && savedConsent.categories) {
+      if (savedConsent.clearCookiesOnLoad) {
         deleteAllCookies();
-        window.location.reload();
-      };
+        saveConsent(savedConsent.categories, false);
+      }
 
-      cookieSystem.acceptAll = function() {
-        const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
-        saveConsent(allCategories);
-        loadScripts(allCategories);
-        hideElement(cookiesCard);
-        if (cookiesTrigger) {
-          showElement(cookiesTrigger);
+      const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
+      allCategories.forEach(category => {
+        const optionElement = cookiesCard.querySelector(`[nf-cc="${category}"]`);
+        if (optionElement) {
+          if (savedConsent.categories.includes(category)) {
+            optionElement.classList.add('option-active');
+          } else {
+            optionElement.classList.remove('option-active');
+          }
         }
-        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
-          detail: { action: 'accept-all-programmatic', categories: allCategories }
-        }));
-      };
+      });
 
-      cookieSystem.rejectAll = function() {
-        const essentialsOnly = ['essentials'];
-        saveConsent(essentialsOnly, true);
-        window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
-          detail: { action: 'reject-all-programmatic', categories: essentialsOnly }
-        }));
-        window.location.reload();
-      };
-    })
-    .catch(error => {
-      console.error('Cookie script error:', error);
-    });
+      hideElement(cookiesCard);
+      if (cookiesTrigger) {
+        showElement(cookiesTrigger);
+      }
+      loadScripts(savedConsent.categories);
+    } else if (isOptOut) {
+      const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
+      loadScripts(allCategories);
+    }
+
+    setupUIInteractions(cookiesCard, cookiesTrigger, isOptOut, isFirstVisit);
+
+    // Expose global API
+    cookieSystem.openConsent = function() {
+      showElement(cookiesCard);
+      cookiesCard.classList.add('options-open');
+      if (cookiesTrigger) {
+        hideElement(cookiesTrigger);
+      }
+      window.dispatchEvent(new CustomEvent('nf-consent-banner-opened', {
+        detail: { source: 'programmatic' }
+      }));
+    };
+
+    cookieSystem.getConsent = function() {
+      return loadConsent();
+    };
+
+    cookieSystem.updateConsent = function(categories) {
+      if (!Array.isArray(categories)) {
+        console.error('updateConsent requires an array of categories');
+        return;
+      }
+      saveConsent(categories, true);
+      window.location.reload();
+    };
+
+    cookieSystem.revokeConsent = function() {
+      localStorage.removeItem('nf-cookie-consent');
+      deleteAllCookies();
+      window.location.reload();
+    };
+
+    cookieSystem.acceptAll = function() {
+      const allCategories = ['essentials', 'personalization', 'analytics', 'marketing'];
+      saveConsent(allCategories);
+      loadScripts(allCategories);
+      hideElement(cookiesCard);
+      if (cookiesTrigger) {
+        showElement(cookiesTrigger);
+      }
+      window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+        detail: { action: 'accept-all-programmatic', categories: allCategories }
+      }));
+    };
+
+    cookieSystem.rejectAll = function() {
+      const essentialsOnly = ['essentials'];
+      saveConsent(essentialsOnly, true);
+      window.dispatchEvent(new CustomEvent('nf-consent-banner-closed', {
+        detail: { action: 'reject-all-programmatic', categories: essentialsOnly }
+      }));
+      window.location.reload();
+    };
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
