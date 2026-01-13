@@ -369,13 +369,16 @@
 
     cookiesCard.classList.remove('options-open');
 
-    let cookiesTrigger = null;
+    let cookiesTrigger = document.querySelector('.cookies_trigger');
 
     if (includeTrigger) {
-      cookiesTrigger = document.querySelector('.cookies_trigger');
       if (cookiesTrigger) {
         hideElement(cookiesTrigger);
       }
+    } else if (cookiesTrigger) {
+      // Hide trigger permanently if nf-trigger is not enabled
+      hideElement(cookiesTrigger);
+      cookiesTrigger = null;
     }
 
     const savedConsent = loadConsent();
