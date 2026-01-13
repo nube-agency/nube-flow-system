@@ -97,14 +97,13 @@ Design your cookie banner in Webflow with the required structure and attributes:
 
 ### 2. Add Script to Your Site
 
-In Webflow Project Settings → Custom Code → Footer Code:
+Include the cookie kit HTML directly in your page (e.g., in a Webflow symbol), then add the script in Webflow Project Settings → Custom Code → Footer Code:
 
 ```html
-<script
-  src="https://your-domain.com/scripts/cookies.js"
-  nf-source="/cookie-banner-page"
-></script>
+<script src="https://your-domain.com/scripts/cookies.js"></script>
 ```
+
+The script will automatically find the `[nf-cc="card"]` element in your page.
 
 ### 3. Block Third-Party Scripts
 
@@ -132,17 +131,11 @@ Wrap tracking scripts in containers with category attributes:
 
 ## Script Attributes
 
-### Required
-
-| Attribute | Description | Example |
-|-----------|-------------|---------|
-| `nf-source` | Path to page containing cookie banner HTML | `/cookie-banner` |
-
-### Optional
+All attributes are optional:
 
 | Attribute | Default | Description | Example |
 |-----------|---------|-------------|---------|
-| `nf-trigger` | `false` | Include floating trigger button | `nf-trigger="true"` |
+| `nf-trigger` | `false` | Enable floating trigger button (`.cookies_trigger` element) | `nf-trigger="true"` |
 | `nf-optout` | `false` | Enable opt-out mode (all cookies on by default) | `nf-optout="true"` |
 | `nf-consent-expiry` | `30` | Days until consent expires | `nf-consent-expiry="90"` |
 | `nf-consent-version` | `1.0` | Version of privacy policy | `nf-consent-version="2.0"` |
@@ -151,39 +144,22 @@ Wrap tracking scripts in containers with category attributes:
 
 **Basic (Opt-in):**
 ```html
-<script
-  src="cookies.js"
-  nf-source="/cookie-banner"
-></script>
+<script src="cookies.js"></script>
 ```
 
 **With Trigger Button (Opt-in):**
 ```html
-<script
-  src="cookies.js"
-  nf-source="/cookie-banner"
-  nf-trigger="true"
-></script>
+<script src="cookies.js" nf-trigger="true"></script>
 ```
 
 **Opt-out Mode:**
 ```html
-<script
-  src="cookies.js"
-  nf-source="/cookie-banner"
-  nf-optout="true"
-  nf-trigger="true"
-></script>
+<script src="cookies.js" nf-optout="true" nf-trigger="true"></script>
 ```
 
 **Custom Expiry & Versioning:**
 ```html
-<script
-  src="cookies.js"
-  nf-source="/cookie-banner"
-  nf-consent-expiry="90"
-  nf-consent-version="2.0"
-></script>
+<script src="cookies.js" nf-consent-expiry="90" nf-consent-version="2.0"></script>
 ```
 
 ---
@@ -455,11 +431,7 @@ if (consent && consent.categories.includes('marketing')) {
 ### Re-consent Trigger
 Change version in script tag:
 ```html
-<script
-  src="cookies.js"
-  nf-source="/cookie-banner"
-  nf-consent-version="2.0"
-></script>
+<script src="cookies.js" nf-consent-version="2.0"></script>
 ```
 
 ---
@@ -517,8 +489,8 @@ Stored data structure:
 ## Troubleshooting
 
 ### Banner Not Showing
-- Check `nf-source` path is correct
-- Verify banner HTML exists at source path
+- Verify cookie kit HTML with `[nf-cc="card"]` exists in the page
+- Ensure the script loads after the DOM elements are present
 - Check browser console for errors
 
 ### Scripts Not Loading
@@ -540,7 +512,7 @@ Stored data structure:
 
 ## Best Practices
 
-1. **Host banner on same domain** - Avoid CORS issues
+1. **Use a symbol** - Include cookie kit as a Webflow symbol for easy management across pages
 2. **Test both modes** - Try opt-in and opt-out
 3. **Update version** - Increment when privacy policy changes
 4. **Monitor console** - Check for integration errors
